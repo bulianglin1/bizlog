@@ -3,47 +3,58 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.bizlog</groupId>
-    <artifactId>mzt-biz-log</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+
+    <groupId>io.github.bulianglin1</groupId>
+    <artifactId>bizlog</artifactId>
+    <version>1.0.0</version>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>业务日志操作组件</description>
 
-    <url>https://gitee.com/wangfugui-ma/aliyun-oss-spring-boot-starter</url>
+    <description>描述信息</description>
+    <url>你的项目仓库地址</url>
+
 
     <licenses>
         <license>
-            <name>The Apache Software License, Version 2.0</name>
+            <name>The Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <id>masiyi</id>
-            <name>masiyi</name>
-            <email>masiyi163163@163.com</email>
-            <roles>
-                <role>Project Manager</role>
-                <role>Architect</role>
-            </roles>
+            <name>作者名称</name>
+            <email>你github的邮箱</email>
+            <organization>Sonatype</organization>
+            <organizationUrl>http://www.sonatype.com</organizationUrl>
         </developer>
     </developers>
 
-
     <scm>
-        <connection>https://gitee.com/wangfugui-ma/aliyun-oss-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:ssh://git@gitee.com:wangfugui-ma/aliyun-oss-spring-boot-starter.git
-        </developerConnection>
-        <url>https://gitee.com/wangfugui-ma/aliyun-oss-spring-boot-starter</url>
+        <connection>scm:git:git://github.com/bulianglin1/bizlog.git</connection>
+        <developerConnection>scm:git:ssh://github.com:bulianglin1/bizlog.git</developerConnection>
+        <url>http://github.com/bulianglin1/bizlog/tree/master</url>
     </scm>
 
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -56,6 +67,7 @@
             <artifactId>java-object-diff</artifactId>
             <version>0.95</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -78,19 +90,37 @@
 
     <build>
         <plugins>
-
-            <!--   central发布插件    -->
+            <!--    Maven插件发布    -->
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
                 <version>0.4.0</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <publishingServerId>masiyi</publishingServerId>
+                    <publishingServerId>ossrh</publishingServerId>
                     <tokenAuth>true</tokenAuth>
+                    <autoPublish>false</autoPublish>
                 </configuration>
             </plugin>
-            <!--   source源码插件 -->
+
+
+            <!--    签名插件        -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--     生成源文件       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -104,7 +134,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--   javadoc插件 -->
+            <!--     生成源javadocs文件       -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -118,26 +148,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
-                <configuration>
-                    <executable>E:\dev\gpg2\GnuPG\bin\gpg.exe</executable>
-                    <keyname>wangfugui-ma</keyname>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
         </plugins>
     </build>
-
 </project>
